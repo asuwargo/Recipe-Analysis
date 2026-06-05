@@ -164,5 +164,95 @@ I tested description on 2 different columns `'minutes'` and `'ingredients'`.
   frameborder="0"
 ></iframe>
 
+## Hypothesis Testing
+To answer the question of whether or not there is a relationship between cooking time and the average rating of a recipe, hypothesis testing is conducted. 
 
+**Null Hypothesis:** There is no relationship between cooking time (`'minutes'`) 
+and the average rating of a recipe. Any observed correlation is due to random chance.
 
+**Alternative Hypothesis:** There is a relationship between cooking time and 
+the average rating of a recipe.
+
+**Test Statistic:** Pearson correlation coefficient between `'minutes'` and `'rating'`.
+
+**Significance Level:** 0.05
+
+**Result:** The observed correlation was 0.0014 and the p-value was 0.716, which 
+is well above the 0.05 significance level. We fail to reject the null hypothesis 
+— there is no significant relationship between cooking time and average rating.
+
+## Framing a Prediction Problem
+The prediction problem is to **predict the number of calories in a recipe** 
+given information about the recipe itself.
+
+**Type:** Regression — calories is a continuous numeric variable.
+
+**Response Variable:** `'calories'` — chosen because it is one of the most 
+practically useful nutritional facts about a recipe. Many people who are health 
+conscious or have specific dietary goals need to know the calorie content of a 
+recipe. 
+
+**Metric:** RMSE (Root Mean Squared Error) — chosen because it is in the same 
+units as calories, making it interpretable. It also penalizes large errors more 
+heavily than small ones, which is important here since being off by 1000 calories 
+is much worse than being off by 50.
+
+## Baseline Model
+For the baseline model, the data is split into training data and test data with a test size of 0.2. Linear regression is used with `'n_ingredients'` and `'n_steps'` as the features, both are quantitative nominal values so there is no need to encode the values. RMSE is used as the metric and the result for the test set is **583.4**.
+
+I think this model is not good because the RMSE is pretty high. The model is too simple and the features used are not enough to predict calories. 
+
+## Final Model 
+
+**Features added:**
+1. One hot encoded `'tags'`** (nominal)
+Tags such as "dessert", "low-carb", and "healthy" directly reflect the type and nutritional profile of a recipe. 
+A recipe tagged as "dessert" is likely to have more sugar and calories than one tagged as "low-carb".The top 20 most common tags were selected using `MultiLabelBinarizer`, which converts the list of tags for each recipe into 20 
+binary columns (1 if the recipe has that tag, 0 if not). This gives the model 
+information about the category and dietary nature of a recipe, which is strongly 
+related to calorie content.
+
+2. **`'log(n_steps)'`** (quantitative) — The distribution of `'n_steps'` is 
+right-skewed, with most recipes having few steps but some having many. A 
+`FunctionTransformer` with `np.log1p` was applied to compress the large values 
+and make the relationship with calories more linear, which helps Ridge regression 
+fit the data better. `np.log1p` was used instead of `np.log` to handle any 
+potential zero values.
+
+In total, the final model uses 22 features:
+- 2 quantitative (`'n_steps'`, `'n_ingredients'`) — passed through as-is
+- 1 quantitative engineered (`'log_steps'`) — log transform of `'n_steps'`
+- 20 nominal (one-hot encoded tags) — binary columns for each of the top 20 tags
+
+No ordinal features were used.
+
+**Modeling Algorithm:** Ridge Regression — chosen as an upgrade from Linear 
+Regression because it adds a regularization penalty (L2) that shrinks large 
+coefficients toward zero, preventing overfitting. This is especially useful 
+when adding many binary tag features, since some tags may not be very 
+informative and Ridge will naturally reduce their influence.
+
+**Pipeline:** All steps were implemented in a single `sklearn` Pipeline:
+1. The features (`'n_steps'`, `'n_ingredients'`, `'log_steps'`, and the 20 tag 
+columns) were concatenated into a single dataframe before being passed into the pipeline.
+2. The Ridge model was then fit on these features.
+
+**Hyperparameter Tuning:** The `'alpha'` hyperparameter in Ridge controls the 
+amount of regularization — a higher alpha means more shrinkage. `GridSearchCV` 
+with 5-fold `KFold` cross validation was used to search over 
+`[0.1, 1, 10, 100]`. Each combination was evaluated using RMSE and the best 
+alpha found was **10**, meaning a moderate amount of regularization worked best.
+
+<iframe
+  src="assets/hyperparameter-tuning.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+**Performance:** The final model achieved an RMSE of **578.9** on the test set, 
+compared to the baseline RMSE of **583.4**. This is an improvement over the 
+baseline, showing that adding tag features and the log transform helped the model 
+better predict calories. The improvement makes sense because tags directly encode 
+the type and dietary nature of a recipe, which is strongly related to calorie 
+content — something that `'n_steps'` and `'n_ingredients'` alone could not capture.
