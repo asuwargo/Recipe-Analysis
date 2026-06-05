@@ -52,28 +52,28 @@ dataframe. This gives each recipe a single representative rating instead of mult
 recipes by year and comparing model performance across different time periods.
 
 After cleaning the data, these are the columns and the data type of each column: 
-| Column         | Description    |
-|:---------------|:---------------|
-| name           | object         |
-| id             | int64          |
-| minutes        | int64          |
-| contributor_id | int64          |
-| submitted      | datetime64[ns] |
-| tags           | object         |
-| nutrition      | object         |
-| n_steps        | int64          |
-| steps          | object         |
-| description    | object         |
-| ingredients    | object         |
-| n_ingredients  | int64          |
-| rating         | float64        |
-| calories       | float64        |
-| total_fat      | float64        |
-| sugar          | float64        |
-| sodium         | float64        |
-| protein        | float64        |
-| saturated_fat  | float64        |
-| carbohydrates  | float64        |
+| Column | Description |
+|:---|:---|
+| `'name'` | object |
+| `'id'` | int64 |
+| `'minutes'` | int64 |
+| `'contributor_id'` | int64 |
+| `'submitted'` | datetime64[ns] |
+| `'tags'` | object |
+| `'nutrition'` | object |
+| `'n_steps'` | int64 |
+| `'steps'` | object |
+| `'description'` | object |
+| `'ingredients'` | object |
+| `'n_ingredients'` | int64 |
+| `'rating'` | float64 |
+| `'calories'` | float64 |
+| `'total_fat'` | float64 |
+| `'sugar'` | float64 |
+| `'sodium'` | float64 |
+| `'protein'` | float64 |
+| `'saturated_fat'` | float64 |
+| `'carbohydrates'` | float64 |
 
 Since there are a lot of columns in the dataframe, here is the head of the cleaned dataframe with only several columns that are relevant:
 | name                                 |   minutes |   n_steps |   n_ingredients |   rating |   calories |
@@ -91,7 +91,6 @@ Since there are a lot of columns in the dataframe, here is the head of the clean
   height="600"
   frameborder="0"
 ></iframe>
-
 The distribution of cooking time is right-skewed, with most recipes taking under 60 minutes to prepare. This suggests that the majority of recipes on Food.com are relatively quick to make.
 
 <iframe
@@ -100,5 +99,4 @@ The distribution of cooking time is right-skewed, with most recipes taking under
   height="600"
   frameborder="0"
 ></iframe>
-
 The distribution of calories is also right-skewed, with most recipes containing under 500 calories. A small number of recipes have very high calorie counts, which is why outliers were removed for visualization purposes.
