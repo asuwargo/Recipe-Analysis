@@ -85,4 +85,20 @@ Since there are a lot of columns in the dataframe, here is the head of the clean
 | 2000 meatloaf                        |        90 |        17 |              13 |        5 |      267   |
 
 ### Univariate Analysis
+<iframe
+  src="assets/minutes-dist.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
 
+The distribution of cooking time is right-skewed, with most recipes taking under 60 minutes to prepare. This suggests that the majority of recipes on Food.com are relatively quick to make.
+
+<iframe
+  src="assets/calories-dist.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+The distribution of calories is also right-skewed, with most recipes containing under 500 calories. A small number of recipes have very high calorie counts, which is why outliers were removed for visualization purposes.
