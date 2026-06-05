@@ -92,7 +92,6 @@ Since there are a lot of columns in the dataframe, here is the head of the clean
   frameborder="0"
 ></iframe>
 The distribution of cooking time is right-skewed, with most recipes taking under 60 minutes to prepare. This suggests that the majority of recipes on Food.com are relatively quick to make.
-
 <iframe
   src="assets/calories-dist.html"
   width="800"
@@ -100,3 +99,30 @@ The distribution of cooking time is right-skewed, with most recipes taking under
   frameborder="0"
 ></iframe>
 The distribution of calories is also right-skewed, with most recipes containing under 500 calories. A small number of recipes have very high calorie counts, which is why outliers were removed for visualization purposes.
+
+### Bivariate Analysis
+<iframe
+  src="assets/minutes-rating.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+The scatter plot of cooking time vs average rating shows no clear relationship between the two variables. Recipes of all cooking times tend to receive similar ratings, suggesting that cooking time alone does not strongly influence how a recipe is rated.
+<iframe
+  src="assets/nsteps-calories.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+The scatter plot of number of steps vs calories shows a slight positive trend — recipes with more steps tend to have slightly higher calories. This makes sense as more complex recipes likely use more ingredients and result in higher calorie dishes.
+
+## Interesting Aggregates
+The table below shows the average calories by cooking time range:
+| time_range   |   calories |
+|:-------------|-----------:|
+| 0-30         |    341.89  |
+| 30-60        |    428.849 |
+| 60-120       |    528.47  |
+| 120-300      |    537.993 |
+
+Recipes that take longer to cook tend to have slightly higher average calories. This suggests that longer recipes are generally more complex and calorie-dense than quick recipes
