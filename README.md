@@ -126,3 +126,43 @@ The table below shows the average calories by cooking time range:
 | 120-300      |    537.993 |
 
 Recipes that take longer to cook tend to have slightly higher average calories. This suggests that longer recipes are generally more complex and calorie-dense than quick recipes
+
+## Assessment of Missingness
+
+### NMAR Analysis
+I believe the `'rating'` column is NMAR because people who don't really care about the recipe and doesn't have any significant experience that will lead them to leave a rating, will not rate at all. So most people who had a not so good experience with the recipe will most likely not leave a rating compared to someone who had a good experience, they will more likely leave a rating. 
+
+### Missingness Dependency
+To examine the missingness of `'description'`, permutation test is done to determine whether or not the column is dependent on another column.
+I tested description on 2 different columns `'minutes'` and `'ingredients'`.
+
+**Does description missingness depend on `'minutes'`?**
+
+- **Null Hypothesis:** The missingness of `'description'` does not depend on `'minutes'`. Any difference in means is due to random chance.
+- **Alternative Hypothesis:** The missingness of `'description'` does depend on `'minutes'`.
+- **Test Statistic:** Absolute difference in means of `'minutes'` between recipes with and without a description.
+- **Result:** The observed difference in means was 0.584 and the p-value was 0.59, which is above the 0.05 significance level. We fail to reject the null hypothesis — the missingness of `'description'` does not depend on `'minutes'`.
+
+<iframe
+  src="assets/missing-minutes.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+**Does description missingness depend on `'n_ingredients'`?**
+
+- **Null Hypothesis:** The missingness of `'description'` does not depend on `'n_ingredients'`. Any difference in means is due to random chance.
+- **Alternative Hypothesis:** The missingness of `'description'` does depend on `'n_ingredients'`.
+- **Test Statistic:** Absolute difference in means of `'n_ingredients'` between recipes with and without a description.
+- **Result:** The p-value was 0.001, which is below the 0.05 significance level. We reject the null hypothesis — the missingness of `'description'` does depend on `'n_ingredients'`.
+
+<iframe
+  src="assets/missing-n-ingredients.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+
+
