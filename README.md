@@ -52,6 +52,7 @@ dataframe. This gives each recipe a single representative rating instead of mult
 recipes by year and comparing model performance across different time periods.
 
 After cleaning the data, these are the columns and the data type of each column: 
+
 | Column | Description |
 | ----------- | ----------- |
 | `'name'` | object |
@@ -76,6 +77,7 @@ After cleaning the data, these are the columns and the data type of each column:
 | `'carbohydrates'` | float64 |
 
 Since there are a lot of columns in the dataframe, here is the head of the cleaned dataframe with only several columns that are relevant:
+
 | name                                 |   minutes |   n_steps |   n_ingredients |   rating |   calories |
 |:---|---:|---:|---:|---:|---:|
 | 1 brownies in the world    best ever |        40 |        10 |               9 |        4 |      138.4 |
