@@ -120,6 +120,7 @@ The scatter plot of number of steps vs calories shows a slight positive trend â€
 
 ## Interesting Aggregates
 The table below shows the average calories by cooking time range:
+
 | time_range   |   calories |
 | ----------- | ----------- |
 | 0-30         |    341.89  |
