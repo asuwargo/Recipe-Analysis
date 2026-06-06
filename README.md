@@ -205,7 +205,7 @@ I think this model is not good because the RMSE is pretty high. The model is too
 ## Final Model 
 
 **Features added:**
-1. One hot encoded `'tags'`** (nominal)
+1. One hot encoded `'tags'` (nominal)
 Tags such as "dessert", "low-carb", and "healthy" directly reflect the type and nutritional profile of a recipe. 
 A recipe tagged as "dessert" is likely to have more sugar and calories than one tagged as "low-carb".The top 20 most common tags were selected using `MultiLabelBinarizer`, which converts the list of tags for each recipe into 20 
 binary columns (1 if the recipe has that tag, 0 if not). This gives the model 
@@ -251,8 +251,50 @@ alpha found was **10**, meaning a moderate amount of regularization worked best.
 ></iframe>
 
 **Performance:** The final model achieved an RMSE of **578.9** on the test set, 
-compared to the baseline RMSE of **583.4**. This is an improvement over the 
-baseline, showing that adding tag features and the log transform helped the model 
-better predict calories. The improvement makes sense because tags directly encode 
-the type and dietary nature of a recipe, which is strongly related to calorie 
-content — something that `'n_steps'` and `'n_ingredients'` alone could not capture.
+compared to the baseline RMSE of **583.4**. While the improvement is modest, 
+it does show that adding tag features and the log transform helped the model 
+better predict calories. The small improvement is likely because `'n_steps'` 
+and `'n_ingredients'` are weakly correlated with calories to begin with (0.14 
+and 0.12 respectively), so even with better features the model struggles to 
+predict calories accurately without nutritional information. The assignment 
+intentionally avoids using nutritional columns to prevent data leakage, which 
+limits how much the model can improve.
+
+## Fairness Analysis
+
+**Groups:**
+- **Group X (Old recipes):** Recipes submitted before 2010
+- **Group Y (New recipes):** Recipes submitted in 2010 or after
+
+**Evaluation Metric:** RMSE — the same metric used to evaluate the final model.
+
+**Null Hypothesis:** The model is fair. Its RMSE for old recipes and new recipes 
+are roughly the same, and any difference is due to random chance.
+
+**Alternative Hypothesis:** The model is unfair. Its RMSE for old recipes is 
+different from its RMSE for new recipes.
+
+**Test Statistic:** Difference in RMSE (old recipes − new recipes).
+
+**Significance Level:** 0.05
+
+**Results:**
+- RMSE for old recipes (before 2010): **567.8**
+- RMSE for new recipes (2010 or after): **597.6**
+- Observed difference: **-29.8**
+- p-value: **0.614**
+
+**Conclusion:** Since the p-value of 0.614 is well above the 0.05 significance 
+level, we fail to reject the null hypothesis. The difference in RMSE between 
+old and new recipes is not statistically significant and is likely due to random 
+chance. The model appears to perform equally well for both old and new recipes.
+
+<iframe
+  src="assets/fairness-analysis.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+
+
