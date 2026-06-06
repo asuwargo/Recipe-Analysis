@@ -53,7 +53,7 @@ recipes by year and comparing model performance across different time periods.
 
 After cleaning the data, these are the columns and the data type of each column: 
 | Column | Description |
-|:---|:---|
+| ----------- | ----------- |
 | `'name'` | object |
 | `'id'` | int64 |
 | `'minutes'` | int64 |
@@ -77,7 +77,7 @@ After cleaning the data, these are the columns and the data type of each column:
 
 Since there are a lot of columns in the dataframe, here is the head of the cleaned dataframe with only several columns that are relevant:
 | name                                 |   minutes |   n_steps |   n_ingredients |   rating |   calories |
-|:-------------------------------------|----------:|----------:|----------------:|---------:|-----------:|
+| ----------- | ----------- | ----------- | ----------- | ----------- | ----------- |
 | 1 brownies in the world    best ever |        40 |        10 |               9 |        4 |      138.4 |
 | 1 in canada chocolate chip cookies   |        45 |        12 |              11 |        5 |      595.1 |
 | 412 broccoli casserole               |        40 |         6 |               9 |        5 |      194.8 |
@@ -119,7 +119,7 @@ The scatter plot of number of steps vs calories shows a slight positive trend â€
 ## Interesting Aggregates
 The table below shows the average calories by cooking time range:
 | time_range   |   calories |
-|:-------------|-----------:|
+| ----------- | ----------- |
 | 0-30         |    341.89  |
 | 30-60        |    428.849 |
 | 60-120       |    528.47  |
