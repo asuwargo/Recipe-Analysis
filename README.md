@@ -144,7 +144,7 @@ I tested description on 2 different columns `'minutes'` and `'ingredients'`.
 - **Null Hypothesis:** The missingness of `'description'` does not depend on `'minutes'`. Any difference in means is due to random chance.
 - **Alternative Hypothesis:** The missingness of `'description'` does depend on `'minutes'`.
 - **Test Statistic:** Absolute difference in means of `'minutes'` between recipes with and without a description.
-- **Result:** The observed difference in means was 0.584 and the p-value was 0.59, which is above the 0.05 significance level. We fail to reject the null hypothesis — the missingness of `'description'` does not depend on `'minutes'`.
+- **Result:** The p-value was 0.551, which is above the 0.05 significance level. We fail to reject the null hypothesis — the missingness of `'description'` does not depend on `'minutes'`.
 
 <iframe
   src="assets/missing-minutes.html"
@@ -180,7 +180,7 @@ the average rating of a recipe.
 
 **Significance Level:** 0.05
 
-**Result:** The observed correlation was 0.0014 and the p-value was 0.716, which 
+**Result:** The observed correlation was 0.0014 and the p-value was 0.688, which 
 is well above the 0.05 significance level. We fail to reject the null hypothesis 
 — there is no significant relationship between cooking time and average rating.
 
@@ -285,7 +285,7 @@ different from its RMSE for new recipes.
 - RMSE for old recipes (before 2010): **567.8**
 - RMSE for new recipes (2010 or after): **597.6**
 - Observed difference: **-29.8**
-- p-value: **0.614**
+- p-value: **0.62**
 
 **Conclusion:** Since the p-value of 0.614 is well above the 0.05 significance 
 level, we fail to reject the null hypothesis. The difference in RMSE between 
